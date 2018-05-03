@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Ingredient} from '../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {Subject} from 'rxjs/Subject';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class RecipeService {
@@ -26,7 +27,12 @@ export class RecipeService {
 
   ];
 
-  constructor(private slService: ShoppingListService) {
+  constructor(private slService: ShoppingListService, private http: Http) {
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanges.next(this.recipes.slice());
   }
 
   getRecipes() {
