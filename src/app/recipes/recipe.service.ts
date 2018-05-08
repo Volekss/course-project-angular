@@ -4,6 +4,7 @@ import {Ingredient} from '../shared/ingredient.model';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {Subject} from 'rxjs/Subject';
 import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class RecipeService {
@@ -27,7 +28,7 @@ export class RecipeService {
 
   ];
 
-  constructor(private slService: ShoppingListService, private http: Http) {
+  constructor(private slService: ShoppingListService, private http: HttpClient) {
   }
 
   setRecipes(recipes: Recipe[]) {
