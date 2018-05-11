@@ -5,16 +5,16 @@ import {SharedModule} from '../shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {RecipeService} from '../recipes/recipe.service';
 import {DataStorageService} from '../shared/data-storage.service';
-import {AuthService} from '../auth/auth.service';
-import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthInterceptor} from '../shared/auth.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {LoggingInterceptor} from '../shared/logging.interceptor';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorPageComponent
   ],
   imports: [
     SharedModule,
@@ -24,10 +24,8 @@ import {LoggingInterceptor} from '../shared/logging.interceptor';
     AppRoutingModule,
     HeaderComponent
   ],
-  providers: [ShoppingListService,
-    RecipeService,
+  providers: [RecipeService,
     DataStorageService,
-    AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}]
 })

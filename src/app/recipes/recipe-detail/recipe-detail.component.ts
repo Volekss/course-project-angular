@@ -3,6 +3,10 @@ import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
+import {Store} from '@ngrx/store';
+import * as ShoppingListActions from '../../shopping-list/ngrx-store/shopping-list.actions';
+import * as fromApp from '../../ngrx-store/app.reducers';
+
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
@@ -13,7 +17,7 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
 
   onAddToShoppingList() {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
   }
 
   onDeleteRecipe() {
@@ -21,11 +25,12 @@ export class RecipeDetailComponent implements OnInit {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
+  constructor(private recipeService: RecipeService,
+              private route: ActivatedRoute,
+              private router: Router, private store: Store<fromApp.AppState>) {
   }
 
   ngOnInit() {
-    // try to check this const id = this.route.snapshot.params['id'];
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];

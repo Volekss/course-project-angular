@@ -8,6 +8,10 @@ import {ShoppingListModule} from './shopping-list/shopping-list.module';
 import {AuthModule} from './auth/auth.module';
 import {CoreModule} from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
+ import {StoreModule} from '@ngrx/store';
+import { reducers } from './ngrx-store/app.reducers';
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffects} from './auth/ngrx-store/auth.effects';
 
 
 @NgModule({
@@ -20,8 +24,11 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     ShoppingListModule,
     AuthModule,
+    StoreModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   bootstrap: [AppComponent]
 })
