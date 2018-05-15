@@ -10,6 +10,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {RecipesRoutingModule} from './recipes-routing.module';
 import {SharedModule} from '../shared/shared.module';
+import {StoreModule} from '@ngrx/store';
+import {recipeReducer} from './ngrx-store/recipe.reducers';
+import {EffectsModule} from '@ngrx/effects';
+import {RecipeEffects} from './ngrx-store/recipe.effects';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,8 @@ import {SharedModule} from '../shared/shared.module';
     ReactiveFormsModule,
     RecipesRoutingModule,
     SharedModule,
+    StoreModule.forFeature('recipes', recipeReducer), // doing that cause of lazy-loading
+    EffectsModule.forFeature([RecipeEffects])
   ]
 })
 export class RecipesModule {

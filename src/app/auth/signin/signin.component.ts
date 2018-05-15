@@ -3,7 +3,6 @@ import {NgForm} from '@angular/forms';
 import * as fromApp from '../../ngrx-store/app.reducers';
 import * as fromActions from '../ngrx-store/auth.actions';
 import {Store} from '@ngrx/store';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signin',
